@@ -2,7 +2,6 @@
 
 [![Build Status](https://img.shields.io/badge/build-passing-00ff87?style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/)
 [![Node Version](https://img.shields.io/badge/node-%3E%3D_18.0.0-38bdf8?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Platform](https://img.shields.io/badge/platform-Render-ff0055?style=for-the-badge&logo=render&logoColor=white)](https://render.com/)
 [![License](https://img.shields.io/badge/license-MIT-c5a1ff?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 A real-time, responsive gaming telemetry dashboard built with Node.js and vanilla web stack elements. The platform features an active backend state machine that polls industry-standard corporate Statuspage APIs (including Epic Games and Discord) every 5 minutes to deliver true server connectivity logs, live global regional breakdowns, and interactive crowdsourced incident report telemetry.
