@@ -1,7 +1,7 @@
 :root {
     --bg-dark: #0b0c10;
     --panel-dark: #1f2833;
-    --neon-cyan: #66fcf1;
+    --neon-cyan: #38bdf8; /* Muted, modern sky blue */
     --neon-green: #00ff87;
     --neon-amber: #ffcc00;
     --neon-red: #ff0055;
@@ -41,7 +41,7 @@ header {
     font-weight: 700;
     font-size: 1.8rem;
     color: var(--neon-cyan);
-    text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
 .live-indicator {
@@ -85,16 +85,9 @@ main {
 .networks-grid {
     display: flex;
     gap: 15px;
-    overflow-x: auto;
+    justify-content: center; 
+    flex-wrap: wrap; 
     padding-bottom: 10px;
-}
-
-.networks-grid::-webkit-scrollbar {
-    height: 6px;
-}
-.networks-grid::-webkit-scrollbar-thumb {
-    background: #2d3748;
-    border-radius: 3px;
 }
 
 .network-card {
@@ -105,8 +98,13 @@ main {
     display: flex;
     align-items: center;
     gap: 15px;
-    min-width: 250px;
-    flex: 1;
+    min-width: 240px;
+    flex: 0 1 auto;
+    transition: border-color 0.2s;
+}
+
+.network-card:hover {
+    border-color: var(--neon-cyan);
 }
 
 .network-icon {
@@ -122,6 +120,7 @@ main {
     font-weight: 700;
     font-family: 'Orbitron', sans-serif;
     font-size: 0.9rem;
+    color: var(--text-white);
 }
 
 .network-status {
@@ -171,7 +170,7 @@ h2 {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 440px; 
+    min-height: 410px; 
 }
 
 .card-header {
@@ -203,6 +202,17 @@ h2 {
     font-weight: 700;
 }
 
+.game-name a {
+    color: var(--text-white);
+    text-decoration: none;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+.game-name a:hover {
+    color: var(--neon-cyan);
+    text-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+
 .status-badge {
     padding: 6px 12px;
     border-radius: 4px;
@@ -227,25 +237,9 @@ h2 {
     gap: 15px;
 }
 
-.official-link-row {
-    font-size: 0.85rem;
-    text-align: right;
-}
-
-.official-link-row a {
-    color: var(--neon-cyan);
-    text-decoration: none;
-    font-family: 'Orbitron', sans-serif;
-    transition: text-shadow 0.2s;
-}
-
-.official-link-row a:hover {
-    text-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
-}
-
 /* BIGGER GRAPHS */
 .graph-container {
-    height: 90px; /* Doubled height as requested */
+    height: 90px; 
     background: #141a22;
     border-radius: 4px;
     padding: 4px;
@@ -256,6 +250,36 @@ h2 {
 .graph-container svg {
     width: 100%;
     height: 100%;
+}
+
+/* REGION PILLS (NEW) */
+.region-pills {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: -5px; /* Pulls it up slightly closer to the graph base */
+}
+
+.region-pill {
+    background: rgba(11, 12, 16, 0.5);
+    border: 1px solid #2d3748;
+    padding: 5px 0;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 1;
+    color: var(--text-white);
+}
+
+.pill-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
 }
 
 .maintenance-text {
