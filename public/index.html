@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NETLAG.IO | Live Gamer Outage Detector</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">NETLAG.IO</div>
+        <div class="controls">
+            <span class="live-indicator"><span class="pulse-dot"></span> LIVE DATA SYNC</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="networks-dashboard">
+            <div id="networks-grid" class="networks-grid">
+                </div>
+        </section>
+
+        <section class="hero">
+            <h1>TELEMETRY LOGS // LIVE STACKS</h1>
+            <p>Real-time game server matrix, community incident reports, and live Statuspage polling.</p>
+        </section>
+
+        <section class="dashboard">
+            <h2><i class="fa-solid fa-fire"></i> TRENDING GAMES</h2>
+            <div id="trending-grid" class="game-grid">
+                </div>
+
+            <h2 style="margin-top: 50px;"><i class="fa-solid fa-server"></i> ALL MONITORED TITLES</h2>
+            <div id="all-games-grid" class="game-grid">
+                </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 NETLAG.IO Project. Backend pulls live Atlassian Statuspage telemetry.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

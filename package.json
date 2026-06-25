@@ -1,0 +1,12 @@
+{
+  "name": "netlag-io",
+  "version": "1.0.0",
+  "description": "Real-time gaming outage detector",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

@@ -1,0 +1,296 @@
+:root {
+    --bg-dark: #0b0c10;
+    --panel-dark: #1f2833;
+    --neon-cyan: #66fcf1;
+    --neon-green: #00ff87;
+    --neon-amber: #ffcc00;
+    --neon-red: #ff0055;
+    --text-white: #ffffff;
+    --text-muted: #c5a1ff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 18px;
+    overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    border-bottom: 2px solid var(--panel-dark);
+    background-color: #0b0c10f2;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--neon-cyan);
+    text-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
+}
+
+.live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: rgba(0, 255, 135, 0.1);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--neon-green);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 255, 135, 0.7); }
+    70% { box-shadow: 0 0 0 6px rgba(0, 255, 135, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 255, 135, 0); }
+}
+
+main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px 20px 60px 20px;
+}
+
+/* --- NETWORKS TOP BAR --- */
+.networks-dashboard {
+    margin-bottom: 40px;
+}
+
+.networks-grid {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.networks-grid::-webkit-scrollbar {
+    height: 6px;
+}
+.networks-grid::-webkit-scrollbar-thumb {
+    background: #2d3748;
+    border-radius: 3px;
+}
+
+.network-card {
+    background: var(--panel-dark);
+    border: 1px solid #2d3748;
+    border-radius: 6px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 250px;
+    flex: 1;
+}
+
+.network-icon {
+    font-size: 2rem;
+    color: var(--text-white);
+}
+
+.network-info {
+    flex: 1;
+}
+
+.network-name {
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+}
+
+.network-status {
+    font-size: 0.8rem;
+    color: var(--neon-green);
+}
+.network-status.down { color: var(--neon-red); }
+
+/* --- HERO & GAMES --- */
+.hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.hero p {
+    color: #85929E;
+    font-size: 1.2rem;
+}
+
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #2d3748;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+}
+
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 25px;
+}
+
+.game-card {
+    background: var(--panel-dark);
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid #2d3748;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 440px; 
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.title-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.dot-operational { background-color: var(--neon-green); box-shadow: 0 0 8px var(--neon-green); }
+.dot-degraded { background-color: var(--neon-amber); box-shadow: 0 0 8px var(--neon-amber); }
+.dot-outage { background-color: var(--neon-red); box-shadow: 0 0 8px var(--neon-red); }
+
+.game-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 115px;
+}
+
+.status-operational { background: rgba(0, 255, 135, 0.1); color: var(--neon-green); border: 1px solid var(--neon-green); }
+.status-degraded { background: rgba(255, 204, 0, 0.1); color: var(--neon-amber); border: 1px solid var(--neon-amber); }
+.status-outage { background: rgba(255, 0, 85, 0.1); color: var(--neon-red); border: 1px solid var(--neon-red); }
+
+.card-body {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.official-link-row {
+    font-size: 0.85rem;
+    text-align: right;
+}
+
+.official-link-row a {
+    color: var(--neon-cyan);
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    transition: text-shadow 0.2s;
+}
+
+.official-link-row a:hover {
+    text-shadow: 0 0 8px rgba(102, 252, 241, 0.6);
+}
+
+/* BIGGER GRAPHS */
+.graph-container {
+    height: 90px; /* Doubled height as requested */
+    background: #141a22;
+    border-radius: 4px;
+    padding: 4px;
+    border: 1px solid #2d3748;
+    position: relative;
+}
+
+.graph-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.maintenance-text {
+    font-size: 0.9rem;
+    color: #a0aec0;
+    background: #141a22;
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 3px solid var(--neon-amber);
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+}
+
+.report-btn {
+    background: transparent;
+    color: var(--text-white);
+    border: 1px solid var(--neon-red);
+    padding: 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s;
+    width: 100%;
+    margin-top: auto; 
+}
+
+.report-btn:hover {
+    background: var(--neon-red);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #4a5568;
+    font-size: 0.9rem;
+}
