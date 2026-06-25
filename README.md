@@ -15,7 +15,6 @@ A real-time, responsive gaming telemetry dashboard built with Node.js and vanill
 - [🛠️ Tech Stack](#️-tech-stack)
 - [📦 Directory Structure](#-directory-structure)
 - [💻 Local Installation & Setup](#-local-installation--setup)
-- [🌐 Cloud Deployment Guide (Render)](#-cloud-deployment-guide-render)
 - [📜 License](#-license)
 
 ---
