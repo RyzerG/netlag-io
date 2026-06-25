@@ -76,7 +76,7 @@ Follow these quick commands to spin up the platform on your local desktop machin
 1. Clone the repository:
 
 ```Bash
-git clone [https://github.com/RyzerG/netlag-io.git](https://github.com/RyzerG/netlag-io.git)
+git clone https://github.com/RyzerG/netlag-io.git
 cd netlag-io
 ```
 
