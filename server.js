@@ -11,7 +11,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 const generateBaselineHistory = (baseVal) => Array(15).fill(baseVal);
 
 // Default region operational state
-const defaultRegions = () => ({ US: "Operational", EU: "Operational", ASIA: "Operational" });
+const defaultRegions = () => ({
+    US: "Operational",
+    EU: "Operational",
+    ASIA: "Operational"
+});
 
 // --- MASTER DATA STORE ---
 const systemState = {
@@ -33,6 +37,9 @@ const systemState = {
     }
 };
 
+// Rate limiting map to store IP addresses and timestamps
+const reportRateLimits = new Map();
+
 // --- LIVE POLLING ENGINE ---
 function fetchJSON(url) {
     return new Promise((resolve, reject) => {
@@ -40,7 +47,7 @@ function fetchJSON(url) {
             let data = '';
             res.on('data', chunk => data += chunk);
             res.on('end', () => {
-                try { resolve(JSON.parse(data)); } 
+                try { resolve(JSON.parse(data)); }
                 catch (e) { reject(e); }
             });
         }).on('error', reject);
@@ -53,16 +60,14 @@ const mapStatus = (indicator) => {
     return "Major Outage";
 };
 
-// Calculates regional cascade based on severity of the ping
 function calculateRegions(status) {
     if (status === "Major Outage") return { US: "Major Outage", EU: "Major Outage", ASIA: "Major Outage" };
     if (status === "Degraded Performance") {
-        // Randomly degrade some regions but not all to simulate routing issues
         const states = ["Operational", "Degraded Performance", "Major Outage"];
-        return { 
-            US: states[Math.floor(Math.random() * 2) + 1], 
-            EU: states[Math.floor(Math.random() * 2)], 
-            ASIA: states[Math.floor(Math.random() * 2) + 1] 
+        return {
+            US: states[Math.floor(Math.random() * 2) + 1],
+            EU: states[Math.floor(Math.random() * 2)],
+            ASIA: states[Math.floor(Math.random() * 2) + 1]
         };
     }
     return defaultRegions();
@@ -148,8 +153,22 @@ app.get('/api/status', (req, res) => {
 });
 
 app.post('/api/report', (req, res) => {
+    const userIp = req.ip || req.connection.remoteAddress;
+    const now = Date.now();
+    const cooldown = 60000; // 60 seconds
+
+    // Spam Protection Check
+    if (reportRateLimits.has(userIp)) {
+        const lastReportTime = reportRateLimits.get(userIp);
+        if (now - lastReportTime < cooldown) {
+            return res.status(429).json({ success: false, message: "Please wait 60 seconds before reporting another issue." });
+        }
+    }
+
     const { gameId } = req.body;
     if (systemState.games[gameId]) {
+        reportRateLimits.set(userIp, now); // Update last report time
+        
         systemState.games[gameId].userReports += 40;
         
         const currentLast = systemState.games[gameId].history.pop();
@@ -163,6 +182,7 @@ app.post('/api/report', (req, res) => {
 
         return res.json({ success: true, message: "Report logged!" });
     }
+    
     res.status(400).json({ success: false, message: "Game not found" });
 });
 

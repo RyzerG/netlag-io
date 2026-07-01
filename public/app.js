@@ -1,8 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     fetchLiveTelemetry();
-
     // Re-poll the server every 60 seconds from the frontend just to refresh UI
-    setInterval(fetchLiveTelemetry, 60000); 
+    setInterval(fetchLiveTelemetry, 60000);
 });
 
 async function fetchLiveTelemetry() {
@@ -70,6 +69,7 @@ function renderGames(games) {
 
     games.forEach(game => {
         const cardHTML = createGameCard(game);
+        
         if (game.trending) {
             trendingGrid.innerHTML += cardHTML;
         }
@@ -100,7 +100,7 @@ function createGameCard(game) {
     }
 
     const width = 300;
-    const height = 80; 
+    const height = 80;
     const maxSpike = Math.max(...game.history, 100); 
     
     let points = game.history.map((val, i) => {
@@ -112,7 +112,6 @@ function createGameCard(game) {
     const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x} ${p.y}`).join(' ');
     const areaPath = `${linePath} L ${width} ${height} L 0 ${height} Z`;
 
-    // Generate Region Pills HTML
     let regionPillsHTML = `<div class="region-pills">`;
     ['US', 'EU', 'ASIA'].forEach(region => {
         let regionStatus = game.regions[region];
@@ -159,7 +158,7 @@ function createGameCard(game) {
                     
                     ${regionPillsHTML}
                     
-                    <div class="maintenance-text">🛠️ ${game.maintenance}</div>
+                    <div class="maintenance-text">  ${game.maintenance}</div>
                 </div>
             </div>
             <button class="report-btn" onclick="submitReport('${game.id}')">REPORT ISSUES</button>
@@ -175,8 +174,12 @@ async function submitReport(gameId) {
             body: JSON.stringify({ gameId })
         });
         const result = await response.json();
+        
         if (result.success) {
             fetchLiveTelemetry();
+        } else {
+            // Catches rate limits and invalid requests and alerts the user
+            alert(result.message);
         }
     } catch (error) {
         console.error("Failed to post system anomaly report:", error);
